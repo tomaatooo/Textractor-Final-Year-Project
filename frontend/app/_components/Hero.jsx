@@ -59,7 +59,8 @@ const Hero = () => {
       <h1 className="text-3xl font-extrabold sm:text-5xl">
       Extract Text from Images with the help of <span className='text-primary'>AI</span>
       </h1>
-    {/*console.log("databvase",db)*/}
+    
+    
       <p className="mt-4 sm:text-xl/relaxed text-slate-700">
         Our powerful tool allows you to effortlessly extract texts from images in just a few clicks. Say goodbye to manual typing and let our technology do the work for you.
 

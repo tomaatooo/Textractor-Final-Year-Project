@@ -58,11 +58,10 @@ const Pricing = () => {
         <h1 className="text-3xl font-bold text-white mb-10">Our Pricing Plans</h1>
 
         <div className="flex flex-wrap gap-6 justify-center">
-          {/* Basic Plan - only show if Pro is not selected */}
           {selectedPlan !== 'pro' && (
             <div className="bg-white rounded-2xl shadow-lg p-6 w-72 text-center">
               <h2 className="text-xl font-semibold mb-2">Basic Plan</h2>
-              <p className="text-lg mb-4">$0/month</p>
+              <p className="text-lg mb-4">0/month</p>
               <ul className="text-gray-600 mb-4 space-y-1">
                 <li>✔️ 5 Projects</li>
                 <li>✔️ Basic Support</li>
@@ -72,10 +71,9 @@ const Pricing = () => {
             </div>
           )}
 
-          {/* Pro Plan */}
           <div className="bg-white rounded-2xl shadow-lg p-6 w-72 text-center">
             <h2 className="text-xl font-semibold mb-2">Pro Plan</h2>
-            <p className="text-lg mb-4">$30/month</p>
+            <p className="text-lg mb-4">30/month</p>
             <ul className="text-gray-600 mb-4 space-y-1">
               <li>✔️ Unlimited Projects</li>
               <li>✔️ Priority Support</li>
@@ -96,24 +94,7 @@ const Pricing = () => {
 
             {selectedPlan === 'pro' && (
               <div className="justify-center mt-2">
-                {/*<PayPalButtons
-                  style={{ layout: 'vertical' }}
-                  createOrder={(data, actions) => {
-                    return actions.order.create({
-                      purchase_units: [{
-                        amount: {
-                          value: '30.00',
-                          currency_code: 'USD'
-                        }
-                      }]
-                    })
-                  }}
-                  onApprove={(data, actions) => {
-                    return actions.order.capture().then(onPaymentSuccess)
-                  }}
-                  onCancel={onCancel}
-                  onError={onError}
-                />*/}
+                
                 <Modal>
 
                   <Button className='bg-slate-800 text-white w-full hover:bg-black' >Card</Button>
