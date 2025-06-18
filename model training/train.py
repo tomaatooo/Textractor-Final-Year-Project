@@ -38,7 +38,7 @@ for line in tqdm(words):
     file_name = line_split[0] + ".png"
     label = line_split[-1].rstrip("\n")
 
-    # replace "|" with " " in label
+   
     label = label.replace("|", " ")
 
     rel_path = os.path.join(sentences_folder_path, folder1, folder2, file_name)

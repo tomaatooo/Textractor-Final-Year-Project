@@ -7,7 +7,8 @@ import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
 import {
   Bold, Italic, Underline as UnderlineIcon, Strikethrough, Code, List, ListOrdered,
-  Undo2, Redo2, Heading1, Heading2, Heading3, Quote
+  Undo2, Redo2, Heading1, Heading2, Heading3, Quote,
+  Volume2
 } from 'lucide-react'
 import { doc, getDoc, updateDoc, collection, addDoc } from 'firebase/firestore'
 import { db } from '../../_components/firebase'
@@ -17,6 +18,23 @@ import Header from '@/app/_components/Header'
 
 const MenuBar = ({ editor }) => {
   if (!editor) return null
+
+  const handleReadText = () => {
+  if (typeof window === 'undefined' || !editor) return;
+  if (speechSynthesis.speaking) {
+    speechSynthesis.cancel();
+    return;
+  }
+
+  const html = editor.getHTML();
+
+  const tempElement = document.createElement("div");
+  tempElement.innerHTML = html;
+  const text = tempElement.textContent || tempElement.innerText || "";
+  const utterance = new SpeechSynthesisUtterance(text);
+  speechSynthesis.speak(utterance);
+};
+
 
   const Button = ({ onClick, icon: Icon, title }) => (
     <button
@@ -43,6 +61,7 @@ const MenuBar = ({ editor }) => {
       <Button onClick={() => editor.chain().focus().toggleBlockquote().run()} icon={Quote} title="Blockquote" />
       <Button onClick={() => editor.chain().focus().undo().run()} icon={Undo2} title="Undo" />
       <Button onClick={() => editor.chain().focus().redo().run()} icon={Redo2} title="Redo" />
+      <Button onClick={handleReadText} title="Read Aloud" icon={Volume2} />
     </div>
   )
 }
@@ -60,6 +79,8 @@ export default function EditorPage() {
     extensions: [StarterKit, Underline],
     content: initialContent,
   })
+  
+   
 
   useEffect(() => {
     const fetchDoc = async () => {

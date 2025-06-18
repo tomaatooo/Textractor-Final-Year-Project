@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState,useEffect } from 'react'
-import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js'
 import { Button } from '@/components/ui/button'
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import { useUser } from '@clerk/clerk-react'
@@ -53,7 +52,6 @@ const Pricing = () => {
 
 
   return (
-    <PayPalScriptProvider options={{ 'client-id': process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID }}>
       <div className="flex flex-col items-center justify-center p-6 ">
         <h1 className="text-3xl font-bold text-white mb-10">Our Pricing Plans</h1>
 
@@ -107,7 +105,6 @@ const Pricing = () => {
           </div>
         </div>
       </div>
-    </PayPalScriptProvider>
   )
 }
 

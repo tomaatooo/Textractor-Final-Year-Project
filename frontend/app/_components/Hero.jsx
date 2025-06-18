@@ -1,7 +1,7 @@
 "use client"
 
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useUser } from '@clerk/clerk-react'
 import { addDoc, collection,  getDocs, query, where } from 'firebase/firestore'
@@ -9,6 +9,8 @@ import {db} from './firebase'
 
 const Hero = () => {
   const { user, isSignedIn } = useUser();
+  const [isOpen, setIsOpen] = useState(false);
+
 
   useEffect(() => {
     if (!isSignedIn || !user) return;
@@ -76,12 +78,36 @@ const Hero = () => {
         </div>
         </Link>
 
-        <a
+        <button
           className="block w-full rounded-sm px-12 py-3 text-sm font-medium border  text-primary shadow-sm hover:text-purple-600 focus:ring-3 focus:outline-hidden sm:w-auto"
-          href="#"
+         onClick={() => setIsOpen(true)}
         >
           Watch
-        </a>
+        </button>
+
+        {isOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50">
+          <div className="bg-white p-4 rounded-lg max-w-2xl w-full relative">
+            <button
+              onClick={() => setIsOpen(false)}
+              className="absolute top-2 right-2 text-gray-500 hover:text-black text-2xl"
+            >
+              &times;
+            </button>
+
+            <div className="aspect-w-16 aspect-h-9">
+              <video
+              src="video.mp4"
+              controls
+              className="w-full h-auto rounded"
+            />
+            </div>
+          </div>
+        </div>
+      )}
+
+
+
       </div>
     </div>
   </div>
